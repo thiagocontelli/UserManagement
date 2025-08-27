@@ -7,15 +7,22 @@
         <VerticalStackLayout
             Padding="20"
             Spacing="32">
-            <VerticalStackLayout Spacing="8">
-                <Label 
+            <Grid ColumnDefinitions="Auto, *, Auto" >
+                <VerticalStackLayout Spacing="8">
+                    <Label 
                     FontSize="32"
                     FontAttributes="Bold"
                     Text="User management" />
-                <Label 
+                    <Label 
                     Text="Manage the users of your system." />
-            </VerticalStackLayout>
-
+                </VerticalStackLayout>
+                <BoxView Grid.Column="1" WidthRequest="0"/>
+                <Button 
+                    StyleClass="FilledButton" 
+                    Text="Add user +" 
+                    Grid.Column="2"
+                    Command="{Binding GoToAddUserCommand}"/>
+            </Grid>
             <material:DataGrid ItemsSource="{Binding Items}">
                 <material:DataGrid.EmptyView>
                     <VerticalStackLayout Margin="80,20">

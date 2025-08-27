@@ -10,4 +10,8 @@
         ContentTemplate="{DataTemplate views:UsersView}"
         Route="UsersView" />
 
+    <ShellContent
+        ContentTemplate="{DataTemplate views:AddUserView}"
+        Route="AddUserView" />
+
 </Shell>
