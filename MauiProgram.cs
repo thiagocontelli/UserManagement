@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using UraniumUI;
 using UserManagement.Repositories;
+using UserManagement.Services.UserServices;
 using UserManagement.ViewModels;
 using UserManagement.Views;
 #if WINDOWS
@@ -53,6 +54,7 @@ namespace UserManagement
             builder.Services.AddTransient<UsersView>();
             builder.Services.AddTransient<UsersViewModel>();
             builder.Services.AddSingleton<IUserRepository, InMemoryUserRepository>();
+            builder.Services.AddTransient<GetUsersService>();
 
 #if DEBUG
             builder.Logging.AddDebug();
