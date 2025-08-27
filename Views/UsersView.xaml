@@ -24,7 +24,7 @@
                 </material:DataGrid.EmptyView>
                 <material:DataGrid.Columns>
                     <material:DataGridColumn ValueBinding="{Binding Id}" Title="#" Width="*"/>
-                    <material:DataGridColumn ValueBinding="{Binding Name}" Title="Name" Width="*"/>
+                    <material:DataGridColumn ValueBinding="{Binding FullName}" Title="Name" Width="*"/>
                     <material:DataGridColumn ValueBinding="{Binding Age}" Title="Age" Width="*"/>
                     <material:DataGridColumn ValueBinding="{Binding Address}" Title="Address" Width="*"/>
                 </material:DataGrid.Columns>
