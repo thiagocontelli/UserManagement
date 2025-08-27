@@ -1,5 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+using UraniumUI;
+using UserManagement.ViewModels;
+using UserManagement.Views;
 #if WINDOWS
 using Microsoft.Maui.LifecycleEvents;
 #endif
@@ -13,6 +16,9 @@ namespace UserManagement
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -43,8 +49,11 @@ namespace UserManagement
             });
 #endif
 
+            builder.Services.AddTransient<UsersView>();
+            builder.Services.AddTransient<UsersViewModel>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

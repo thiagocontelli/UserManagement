@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             x:Class="UserManagement.Views.UsersView">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="32">
+            <VerticalStackLayout Spacing="8">
+                <Label 
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    Text="User management" />
+                <Label 
+                    Text="Manage the users of your system." />
+            </VerticalStackLayout>
+
+            <material:DataGrid ItemsSource="{Binding Items}">
+                <material:DataGrid.EmptyView>
+                    <VerticalStackLayout Margin="80,20">
+                        <Label Text="No data available" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </material:DataGrid.EmptyView>
+                <material:DataGrid.Columns>
+                    <material:DataGridColumn ValueBinding="{Binding Id}" Title="#" Width="*"/>
+                    <material:DataGridColumn ValueBinding="{Binding Name}" Title="Name" Width="*"/>
+                    <material:DataGridColumn ValueBinding="{Binding Age}" Title="Age" Width="*"/>
+                    <material:DataGridColumn ValueBinding="{Binding Address}" Title="Address" Width="*"/>
+                </material:DataGrid.Columns>
+            </material:DataGrid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

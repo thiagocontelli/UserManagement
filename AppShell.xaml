@@ -3,12 +3,11 @@
     x:Class="UserManagement.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:UserManagement"
+    xmlns:views="clr-namespace:UserManagement.Views"
     Title="UserManagement">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate views:UsersView}"
+        Route="UsersView" />
 
 </Shell>
