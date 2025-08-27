@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using UraniumUI;
+using UserManagement.Repositories;
 using UserManagement.ViewModels;
 using UserManagement.Views;
 #if WINDOWS
@@ -51,6 +52,7 @@ namespace UserManagement
 
             builder.Services.AddTransient<UsersView>();
             builder.Services.AddTransient<UsersViewModel>();
+            builder.Services.AddSingleton<IUserRepository, InMemoryUserRepository>();
 
 #if DEBUG
             builder.Logging.AddDebug();

@@ -1,14 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using UserManagement.Models;
+using UserManagement.Repositories;
 
 namespace UserManagement.ViewModels;
 
-public class UsersViewModel : ObservableObject
+public partial class UsersViewModel : ObservableObject
 {
     public ObservableCollection<User> Items { get; } = [];
-    public UsersViewModel()
+    private readonly IUserRepository userRepository;
+    public UsersViewModel(IUserRepository userRepository)
     {
-        Items = [new User(1, "John", "Doe", 21, "Street Something"), new User(2, "Mary", "Parker", 19, "Street Other")];
+        this.userRepository = userRepository;
+        LoadUsers();
+    }
+
+    private async void LoadUsers()
+    {
+        List<User> users = await userRepository.GetUsers();
+        foreach (var user in users)
+        {
+            Items.Add(user);
+        }
     }
 }
