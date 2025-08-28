@@ -8,7 +8,7 @@ public class InMemoryUserRepository : IUserRepository
 
     public async Task AddUser(User user)
     {
-        await Task.Delay(500);
+        await Task.Delay(100);
 
         User? existingUser = await GetUserById(user.Id);
 
@@ -22,7 +22,7 @@ public class InMemoryUserRepository : IUserRepository
 
     public async Task DeleteUser(Guid id)
     {
-        await Task.Delay(500);
+        await Task.Delay(100);
         
         User? user = await GetUserById(id) ?? throw new Exception("User not found");
 
@@ -31,19 +31,19 @@ public class InMemoryUserRepository : IUserRepository
 
     public async Task<User?> GetUserById(Guid id)
     {
-        await Task.Delay(500);
+        await Task.Delay(100);
         return users.FirstOrDefault(u => u.Id == id);
     }
 
     public async Task<List<User>> GetUsers()
     {
-        await Task.Delay(500);
+        await Task.Delay(100);
         return users;
     }
 
     public async Task UpdateUser(User user)
     {
-        await Task.Delay(500);
+        await Task.Delay(100);
 
         User? existingUser = await GetUserById(user.Id) ?? throw new Exception("User not found");
 
