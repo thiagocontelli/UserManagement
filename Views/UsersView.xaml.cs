@@ -13,7 +13,21 @@ public partial class UsersView : ContentPage
 		InitializeComponent();
         this.usersViewModel = usersViewModel;
 		BindingContext = usersViewModel;
-	}
+        this.usersViewModel.DisplayDeleteAlert = async (user, confirmedCallback) =>
+        {
+            bool result = await DisplayAlert(
+                "Confirm Delete",
+                $"Do you really want to delete {user.FullName}?",
+                "Yes",
+                "No"
+            );
+
+            if (result)
+            {
+                await confirmedCallback();
+            }
+        };
+    }
 
     private void Button_Clicked(object sender, EventArgs e)
     {

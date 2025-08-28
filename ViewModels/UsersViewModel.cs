@@ -1,15 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using UserManagement.Models;
 using UserManagement.Services.UserServices;
-using UserManagement.Views;
 
 namespace UserManagement.ViewModels;
 
 public partial class UsersViewModel : ObservableObject
 {
+    public Action<User, Func<Task>>? DisplayDeleteAlert;
     public ObservableCollection<User> Items { get; } = [];
     private readonly GetUsersService getUsersService;
     private readonly DeleteUserService deleteUserService;
@@ -31,9 +30,12 @@ public partial class UsersViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task DeleteUser(User user)
+    private void DeleteUser(User user)
     {
-        await deleteUserService.Execute(user.Id);
-        LoadUsers();
+        DisplayDeleteAlert?.Invoke(user, async () =>
+        {
+            await deleteUserService.Execute(user.Id);
+            LoadUsers();
+        });
     }
 }
