@@ -5,6 +5,8 @@ using UserManagement.Repositories;
 using UserManagement.Services.UserServices;
 using UserManagement.ViewModels;
 using UserManagement.Views;
+using UserManagement.Services;
+
 #if WINDOWS
 using Microsoft.Maui.LifecycleEvents;
 #endif
@@ -60,7 +62,11 @@ namespace UserManagement
             builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+
+            ServiceHelper.Initialize(app.Services);
+
+            return app;
         }
     }
 }
