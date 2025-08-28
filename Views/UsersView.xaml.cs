@@ -31,6 +31,7 @@ public partial class UsersView : ContentPage
         }
         else
         {
+            vm?.LoadUser();
             window.Title = "Add user";
         }
 
