@@ -4,14 +4,14 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:UserManagement.Views"
-    Title="UserManagement">
+    Title="User Management">
 
     <ShellContent
         ContentTemplate="{DataTemplate views:UsersView}"
         Route="UsersView" />
 
     <ShellContent
-        ContentTemplate="{DataTemplate views:AddUserView}"
-        Route="AddUserView" />
+        ContentTemplate="{DataTemplate views:UpsertUserView}"
+        Route="UpsertUserView" />
 
 </Shell>

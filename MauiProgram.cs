@@ -55,8 +55,14 @@ namespace UserManagement
 
             builder.Services.AddTransient<UsersView>();
             builder.Services.AddTransient<UsersViewModel>();
+            builder.Services.AddTransient<UpsertUserView>();
+            builder.Services.AddTransient<UpsertUserViewModel>();
             builder.Services.AddSingleton<IUserRepository, InMemoryUserRepository>();
             builder.Services.AddTransient<GetUsersService>();
+            builder.Services.AddTransient<AddUserService>();
+            builder.Services.AddTransient<UpdateUserService>();
+            builder.Services.AddTransient<GetUserService>();
+            builder.Services.AddTransient<DeleteUserService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

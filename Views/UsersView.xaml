@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             x:Name="page"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              x:Class="UserManagement.Views.UsersView">
@@ -21,7 +22,7 @@
                     StyleClass="FilledButton" 
                     Text="Add user +" 
                     Grid.Column="2"
-                    Command="{Binding GoToAddUserCommand}"/>
+                    Clicked="Button_Clicked"/>
             </Grid>
             <material:DataGrid ItemsSource="{Binding Items}">
                 <material:DataGrid.EmptyView>
@@ -30,10 +31,27 @@
                     </VerticalStackLayout>
                 </material:DataGrid.EmptyView>
                 <material:DataGrid.Columns>
-                    <material:DataGridColumn ValueBinding="{Binding Id}" Title="#" Width="*"/>
                     <material:DataGridColumn ValueBinding="{Binding FullName}" Title="Name" Width="*"/>
                     <material:DataGridColumn ValueBinding="{Binding Age}" Title="Age" Width="*"/>
                     <material:DataGridColumn ValueBinding="{Binding Address}" Title="Address" Width="*"/>
+                    <material:DataGridColumn Title="Actions" >
+                        <material:DataGridColumn.CellItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout Spacing="8" Margin="0,0,16,0">
+                                    <Button Text="Delete"
+                                            StyleClass="FilledButton"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                        Command="{Binding Source={x:Reference page}, Path=BindingContext.DeleteUserCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                    <Button Text="Edit"
+                                            StyleClass="FilledButton"
+                                            Clicked="Button_Clicked"
+                                            CommandParameter="{Binding Id}"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </material:DataGridColumn.CellItemTemplate>
+                    </material:DataGridColumn>
                 </material:DataGrid.Columns>
             </material:DataGrid>
         </VerticalStackLayout>
