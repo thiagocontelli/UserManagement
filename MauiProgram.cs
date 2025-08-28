@@ -6,6 +6,7 @@ using UserManagement.Services.UserServices;
 using UserManagement.ViewModels;
 using UserManagement.Views;
 using UserManagement.Services;
+using UserManagement.Services.WindowServices;
 
 #if WINDOWS
 using Microsoft.Maui.LifecycleEvents;
@@ -30,9 +31,10 @@ namespace UserManagement
                 });
 
 #if WINDOWS
+            bool isMainWindowCreated = false;
+
             builder.ConfigureLifecycleEvents(events =>
             {
-                // Make sure to add "using Microsoft.Maui.LifecycleEvents;" in the top of the file 
                 events.AddWindows(windowsLifecycleBuilder =>
                 {
                     windowsLifecycleBuilder.OnWindowCreated(window =>
@@ -41,12 +43,23 @@ namespace UserManagement
                         var handle = WinRT.Interop.WindowNative.GetWindowHandle(window);
                         var id = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(handle);
                         var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(id);
-                        switch (appWindow.Presenter)
+
+                        if (!isMainWindowCreated)
                         {
-                            case Microsoft.UI.Windowing.OverlappedPresenter overlappedPresenter:
+                            isMainWindowCreated = true;
+
+                            if (appWindow.Presenter is Microsoft.UI.Windowing.OverlappedPresenter overlappedPresenter)
+                            {
                                 overlappedPresenter.SetBorderAndTitleBar(true, true);
                                 overlappedPresenter.Maximize();
-                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (appWindow.Presenter is Microsoft.UI.Windowing.OverlappedPresenter secondaryPresenter)
+                            {
+                                secondaryPresenter.SetBorderAndTitleBar(true, true);
+                            }
                         }
                     });
                 });
@@ -63,6 +76,7 @@ namespace UserManagement
             builder.Services.AddTransient<UpdateUserService>();
             builder.Services.AddTransient<GetUserService>();
             builder.Services.AddTransient<DeleteUserService>();
+            builder.Services.AddTransient<OpenWindowService>();
 
 #if DEBUG
             builder.Logging.AddDebug();

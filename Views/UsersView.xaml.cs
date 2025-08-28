@@ -1,5 +1,6 @@
-using System.Threading.Tasks;
+using UserManagement.Models;
 using UserManagement.Services;
+using UserManagement.Services.WindowServices;
 using UserManagement.ViewModels;
 
 namespace UserManagement.Views;
@@ -7,10 +8,12 @@ namespace UserManagement.Views;
 public partial class UsersView : ContentPage
 {
     private readonly UsersViewModel usersViewModel;
+    private readonly OpenWindowService openWindowService;
 
-	public UsersView(UsersViewModel usersViewModel)
+	public UsersView(UsersViewModel usersViewModel, OpenWindowService openWindowService)
 	{
 		InitializeComponent();
+        this.openWindowService = openWindowService;
         this.usersViewModel = usersViewModel;
 		BindingContext = usersViewModel;
         this.usersViewModel.DisplayDeleteAlert = async (user, confirmedCallback) =>
@@ -36,28 +39,24 @@ public partial class UsersView : ContentPage
 
         var page = ServiceHelper.GetService<UpsertUserView>();
         var vm = page.BindingContext as UpsertUserViewModel;
-        var window = new Window(page);
 
         if (userId.HasValue && userId != Guid.Empty)
         {
             vm?.LoadUser(userId.Value);
-            window.Title = "Edit user";
         }
         else
         {
             vm?.LoadUser();
-            window.Title = "Add user";
         }
 
-        var displayInfo = DeviceDisplay.Current.MainDisplayInfo;
-        window.X = (displayInfo.Width / displayInfo.Density - window.Width) / 2;
-        window.Y = (displayInfo.Height / displayInfo.Density - window.Height) / 2;
+        var openWindowInput = new OpenWindowInput(
+            page, 
+            userId.HasValue ? "Edit user" : "Add user", 
+            usersViewModel.LoadUsers, 
+            null, 
+            500
+        );
 
-        window.Destroying += (_, _) =>
-        {
-            usersViewModel.LoadUsers();
-        };
-
-        Application.Current?.OpenWindow(window);
+        openWindowService.Execute(openWindowInput);
     }
 }
