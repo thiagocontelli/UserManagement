@@ -3,10 +3,10 @@ using UserManagement.Repositories;
 
 namespace UserManagement.Services.UserServices;
 
-public class GetUsersService(IUserRepository userRepository) : IService<Unit, List<User>>
+public class GetUserService(IUserRepository userRepository) : IService<Guid, User?>
 {
 
     private readonly IUserRepository userRepository = userRepository;
 
-    public async Task<List<User>> Execute(Unit input) => await userRepository.GetUsers();
+    public async Task<User?> Execute(Guid id) => await userRepository.GetUserById(id);
 }
