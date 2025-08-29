@@ -19,6 +19,10 @@ public class User(Guid id, string name, string lastName, int age, string address
         {
             throw new Exception("Last Name is required");
         }
+        if (Age < 0)
+        {
+            throw new Exception("Age must be an integer number");
+        }
         if (String.IsNullOrEmpty(Address))
         {
             throw new Exception("Address is required");

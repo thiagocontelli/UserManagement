@@ -47,6 +47,7 @@ namespace UserManagement.Tests.Services.UserServices
         [InlineData("", "Silva", 30, "Rua Tal", "Name is required")]
         [InlineData("João", "", 30, "Rua Tal", "Last Name is required")]
         [InlineData("João", "Silva", 30, "", "Address is required")]
+        [InlineData("João", "Silva", -1, "", "Age must be an integer number")]
         public async Task Execute_InvalidInput_ShouldThrowException(string name, string lastName, int age, string address, string expectedErrorMessage)
         {
             var input = new AddUserInput(name, lastName, age, address);
