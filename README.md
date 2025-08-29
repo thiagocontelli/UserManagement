@@ -56,13 +56,12 @@ Os testes cobrem as operações de criação, edição, deleção e listagem de 
 ## Prints da Aplicação
 
 ### Listagem de usuários
-![[Captura de tela 2025-08-28 234157.png]]
+![Listagem](./ReadMeAssets/listagem.png)
 ### Criação de usuário
-![[Captura de tela 2025-08-28 234224.png]]
+![Criação](./ReadMeAssets/criacao.png)
 ### Edição de usuário
-![[Captura de tela 2025-08-28 234240.png]]
+![Edição](./ReadMeAssets/edicao.png)
 ### Deleção de usuário
-![[Captura de tela 2025-08-28 234249.png]]
+![Deleção](./ReadMeAssets/delecao.png)
 ### Gravação da aplicação
-
-![[Gravação de Tela 2025-08-28 235459.mp4]]
+![Gravação](./ReadMeAssets/gravacao.gif)
